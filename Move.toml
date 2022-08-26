@@ -1,0 +1,11 @@
+[package]
+name = 'staking-move'
+version = '1.0.0'
+[dependencies.AptosFramework]
+git = 'https://github.com/aptos-labs/aptos-core.git'
+rev = 'devnet'
+subdir = 'aptos-move/framework/aptos-framework'
+
+[addresses]
+AptosFramework = "0x1"
+WSolStake = "c239cd6073c3de0e7ac241059c4aa046d226fd45e7904720d4edb9b1d8102064"
