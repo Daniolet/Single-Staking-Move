@@ -8,6 +8,6 @@ subdir = 'aptos-move/framework/aptos-framework'
 
 [addresses]
 AptosFramework = "0x1"
-SimpleFarm = "c239cd6073c3de0e7ac241059c4aa046d226fd45e7904720d4edb9b1d8102064"
+SimpleFarm = "30b4babf986422f42da6c03ef86396776fcec6ee38b0499c0f41ce3838be1b1b"
 Initializer = "0x841c2490dfa51655770f8ba66e4e6a9448c61b3668c61b9aa3687d7311a35649"
 MoonCoinType = "92d0c19a94f85b95d15bafed1695284d551262fd47ff746bb7cf8849c418b1cc"
