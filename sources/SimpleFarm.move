@@ -1,7 +1,6 @@
 module SimpleFarm::Staking {
     use std::signer;
     use aptos_framework::coin;
-    use aptos_framework::account;
     use aptos_framework::timestamp;
 
     const EPOOL_NOT_INITIALIZED: u64 = 0;
@@ -18,8 +17,7 @@ module SimpleFarm::Staking {
     struct StakeInfo<phantom CoinType> has key {
         amount: u64,
         reward_amount: u128,
-        reward_debt: u128,
-        stake_coin: coin::Coin<CoinType>
+        reward_debt: u128
     }
 
     struct PoolInfo<phantom CoinType> has key {
@@ -31,12 +29,12 @@ module SimpleFarm::Staking {
         staked_coins: coin::Coin<CoinType>
     }
 
-    public entry fun initialize<CoinType>(initializer: &signer, seeds: vector<u8>) {
+    public entry fun initialize<CoinType>(initializer: &signer) {
         let owner_addr = signer::address_of(initializer);
         assert!(owner_addr == @SimpleFarm, EINVALID_DEDICATED_INITIALIZER);
 
         let current_time = timestamp::now_seconds();
-        move_to<PoolInfo<CoinType>>(&initializer, PoolInfo<CoinType> {
+        move_to<PoolInfo<CoinType>>(initializer, PoolInfo<CoinType> {
             owner_addr,
             acc_reward_per_share: 0,
             token_per_second: TOKEN_PER_SECOND,
@@ -67,8 +65,7 @@ module SimpleFarm::Staking {
             move_to<StakeInfo<CoinType>>(staker, StakeInfo {
                 amount,
                 reward_amount: 0,
-                reward_debt: 0,
-                stake_coin: coin::zero<CoinType>()
+                reward_debt: 0
             });
             pool_info.staker_count = pool_info.staker_count + 1;
         } else {
